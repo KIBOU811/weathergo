@@ -7,28 +7,28 @@ If the `pref` option is not specified, the application calculates coordinates fr
 ## Usage
 
 ```bash
-$ go run ./cmd/console/main.go -days=3
+$ go run ./cmd/weathergo/main.go -days 3            
 Location: Asia/Tokyo
-Current Weather: Cloud development not observed or not observable
-Current Temp: 23.2°C, RH: 57%
-Current Precip: 0.0mm, Pressure: 1008.2hPa
+Current Weather: Clouds generally dissolving or becoming less developed
+Current Temp: 18.0°C, RH: 77%
+Current Precip: 0.0mm, Pressure: 1010.2hPa
 
 --- 3-Day Forecast ---
-2026-04-28: Clouds generally forming or developing Max 23.2°C, Min 10.1°C, Precip Prob 0%
-2026-04-29: Drizzle, not freezing, continuous, heavy Max 20.7°C, Min 14.4°C, Precip Prob 92%
-2026-04-30: Drizzle, not freezing, continuous, moderate Max 16.9°C, Min 12.5°C, Precip Prob 67%
-$ go run ./cmd/console/main.go -pref=1 -days=5
-Location: 北海道 札幌市
-Current Weather: Clouds generally forming or developing
-Current Temp: 7.3°C, RH: 69%
-Current Precip: 0.0mm, Pressure: 1011.2hPa
+2026-04-28: Clouds generally forming or developing Max 23.1°C, Min 10.1°C, Precip Prob 0%
+2026-04-29: Drizzle, not freezing, continuous, slight Max 20.5°C, Min 13.9°C, Precip Prob 90%
+2026-04-30: Drizzle, not freezing, continuous, moderate Max 16.9°C, Min 12.7°C, Precip Prob 84%
+$ go run ./cmd/weathergo/main.go -pref=1 -days=5 -ja
+場所: 北海道 札幌市
+現在の天気: 空の状態に変化がない
+気温: 4.5°C, 湿度: 81%
+降水量: 0.0mm, 気圧: 1013.6hPa
 
---- 5-Day Forecast ---
-2026-04-28: Drizzle, not freezing, continuous, slight Max 9.0°C, Min 4.4°C, Precip Prob 50%
-2026-04-29: Clouds generally forming or developing Max 12.9°C, Min 2.6°C, Precip Prob 90%
-2026-04-30: Clouds generally forming or developing Max 17.9°C, Min 3.3°C, Precip Prob 18%
-2026-05-01: Drizzle, not freezing, continuous, moderate Max 17.2°C, Min 6.1°C, Precip Prob 43%
-2026-05-02: Drizzle, not freezing, continuous, moderate Max 14.6°C, Min 7.5°C, Precip Prob 59%
+--- 5日間の天気 ---
+2026-04-28: 連続的な霧雨（弱い） 最高気温 9.0°C, 最低気温 4.3°C, 降水確率 95%
+2026-04-29: 雲が形成されつつある、または発達しつつある 最高気温 12.9°C, 最低気温 2.9°C, 降水確率 96%
+2026-04-30: 連続的な霧雨（弱い） 最高気温 17.8°C, 最低気温 2.9°C, 降水確率 29%
+2026-05-01: 連続的な雨（弱い） 最高気温 16.9°C, 最低気温 5.9°C, 降水確率 60%
+2026-05-02: 連続的な雨（弱い） 最高気温 13.1°C, 最低気温 7.1°C, 降水確率 78%
 ```
 
 ## `pref` Option Code
