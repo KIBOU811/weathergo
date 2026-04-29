@@ -1,4 +1,4 @@
-package weathergo
+package api
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-// GeoResponse はGeoJS APIからのレスポンス構造を定義します
+// GeoJS APIからのレスポンス構造
 type GeoResponse struct {
 	IP           string `json:"ip"`
 	Country      string `json:"country"`
@@ -20,23 +20,24 @@ type GeoResponse struct {
 	Timezone     string `json:"timezone"`
 }
 
+// 座標情報の取得
 func GetGeoInfo() (*GeoResponse, error) {
 	apiURL := "https://get.geojs.io/v1/ip/geo.json"
 
-	// 1. HTTP GETリクエストの送信
+	// HTTP GETリクエストの送信
 	resp, err := http.Get(apiURL)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 
-	// 2. レスポンスボディの読み取り
+	// レスポンスボディの読み取り
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
 
-	// 3. JSONのパース（デコード）
+	// JSONのパース（デコード）
 	var geo GeoResponse
 	if err := json.Unmarshal(body, &geo); err != nil {
 		return nil, err

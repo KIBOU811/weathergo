@@ -2,21 +2,22 @@
 
 A module that retrieves weather information for a specified location using coordinates.
 
-If the `pref` option is not specified, the application calculates coordinates from the IP address and retrieves weather information for those coordinates.
+The `l` option retrieves the coordinates of a specified location.  
+If neither the `l` option nor the `pref` option is specified, the application calculates coordinates from the IP address and retrieves weather information for those coordinates.
 
 ## Usage
 
 ```bash
-$ go run ./cmd/weathergo/main.go -days 3            
-Location: Asia/Tokyo
-Current Weather: Clouds generally dissolving or becoming less developed
-Current Temp: 18.0°C, RH: 77%
-Current Precip: 0.0mm, Pressure: 1010.2hPa
+$ go run ./cmd/weathergo/main.go -l 札幌 -days 3
+Location: 北海道札幌市
+Current Weather: Clouds generally forming or developing
+Current Temp: 13.2°C, RH: 44%
+Current Precip: 0.0mm, Pressure: 1012.2hPa
 
 --- 3-Day Forecast ---
-2026-04-28: Clouds generally forming or developing Max 23.1°C, Min 10.1°C, Precip Prob 0%
-2026-04-29: Drizzle, not freezing, continuous, slight Max 20.5°C, Min 13.9°C, Precip Prob 90%
-2026-04-30: Drizzle, not freezing, continuous, moderate Max 16.9°C, Min 12.7°C, Precip Prob 84%
+2026-04-29: Rain, not freezing, continuous, slight Max 13.2°C, Min 3.6°C, Precip Prob 94%
+2026-04-30: Drizzle, not freezing, continuous, slight Max 18.1°C, Min 3.3°C, Precip Prob 66%
+2026-05-01: Rain, not freezing, continuous, slight Max 15.1°C, Min 6.6°C, Precip Prob 100%
 $ go run ./cmd/weathergo/main.go -pref=1 -days=5 -ja
 場所: 北海道 札幌市
 現在の天気: 空の状態に変化がない
@@ -31,7 +32,7 @@ $ go run ./cmd/weathergo/main.go -pref=1 -days=5 -ja
 2026-05-02: 連続的な雨（弱い） 最高気温 13.1°C, 最低気温 7.1°C, 降水確率 78%
 ```
 
-## `pref` Option Code
+### `pref` Option Code
 
 | コード | 都道府県 | 都道府県庁所在地 |
 | :--- | :--- | :--- |
@@ -82,3 +83,12 @@ $ go run ./cmd/weathergo/main.go -pref=1 -days=5 -ja
 | 45 | 宮崎県 | 宮崎市 |
 | 46 | 鹿児島県 | 鹿児島市 |
 | 47 | 沖縄県 | 那覇市 |
+
+## Data Sources & APIs
+
+This project retrieves weather and location data using the following services:
+
+* **[GeoJS](https://www.geojs.io/)** - IP-based Geolocation API for automatic location detection.
+* **[Geocoding.jp API](https://geocoding.jp/api/)** - For converting Japanese address queries into geographic coordinates.
+* **[Open-Meteo](https://open-meteo.com/)** - Weather forecast data.
+  * *Note: Weather data is provided by Open-Meteo.com under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).*

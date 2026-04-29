@@ -62,12 +62,13 @@ func showWeatherInfoJa(weather *weathergo.WeatherResponse, place string, days *i
 
 func main() {
 	var (
-		pref = flag.Int("pref", 0, "Japanese prefecture code")
+		loc  = flag.String("l", "", "Keywords for obtaining weather information.")
 		days = flag.Int("days", 7, "N-Day Forecast, n must satisfy the condition 1 <= n <= 7")
 		ja   = flag.Bool("ja", false, "Output weather name in Japanese.")
+		pref = flag.Int("pref", 0, "Japanese prefecture code")
 	)
 	flag.Parse()
-	coodinate, err := weathergo.GetCoodinate(*pref)
+	coodinate, err := weathergo.GetCoodinate(*loc, *pref)
 	if err != nil {
 		fmt.Printf("Error coodinate data: %v\n", err)
 		return
