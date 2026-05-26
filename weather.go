@@ -3,6 +3,7 @@ package weathergo
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 )
 
@@ -74,7 +75,10 @@ func GetWeatherInfo(latitude, longitude float64) (*WeatherResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func() {
+		io.Copy(io.Discard, resp.Body)
+		resp.Body.Close()
+	}()
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("Unexpected status code: %d\n", resp.StatusCode)

@@ -36,7 +36,10 @@ func GetCoordinate(location string) (*Result, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func() {
+		io.Copy(io.Discard, resp.Body)
+		resp.Body.Close()
+	}()
 
 	// レスポンスボディの読み取り
 	body, err := io.ReadAll(resp.Body)
