@@ -66,6 +66,7 @@ func main() {
 		days = flag.Int("days", 7, "N-Day Forecast, n must satisfy the condition 1 <= n <= 7")
 		ja   = flag.Bool("ja", false, "Output weather name in Japanese.")
 		pref = flag.Int("pref", 0, "Japanese prefecture code")
+		jma  = flag.Bool("jma", false, "Use JMA for prediction model.")
 	)
 	flag.Parse()
 	coodinate, err := weathergo.GetCoodinate(*loc, *pref)
@@ -73,7 +74,7 @@ func main() {
 		fmt.Printf("Error coodinate data: %v\n", err)
 		return
 	}
-	weather, err := weathergo.GetWeatherInfo(coodinate.Latitude, coodinate.Longitude)
+	weather, err := weathergo.GetWeatherInfo(coodinate.Latitude, coodinate.Longitude, *jma)
 	if err != nil {
 		fmt.Printf("Error weather data: %v\n", err)
 		return

@@ -67,8 +67,12 @@ type DailyData struct {
 	Sunset                      []string  `json:"sunset"`
 }
 
-func GetWeatherInfo(latitude, longitude float64) (*WeatherResponse, error) {
-	url := fmt.Sprintf("https://api.open-meteo.com/v1/forecast?latitude=%g&longitude=%g&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,pressure_msl_max,pressure_msl_min,sunrise,sunset&current=temperature_2m,weather_code,precipitation,relative_humidity_2m,pressure_msl&timezone=Asia%sTokyo", latitude, longitude, "%2F")
+func GetWeatherInfo(latitude, longitude float64, useJma bool) (*WeatherResponse, error) {
+	jmaParam := ""
+	if useJma {
+		jmaParam = "&models=jma_seamless"
+	}
+	url := fmt.Sprintf("https://api.open-meteo.com/v1/forecast?latitude=%g&longitude=%g&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,pressure_msl_max,pressure_msl_min,sunrise,sunset&current=temperature_2m,weather_code,precipitation,relative_humidity_2m,pressure_msl&timezone=Asia%sTokyo%s", latitude, longitude, "%2F", jmaParam)
 
 	// 1. APIリクエストの送信
 	resp, err := http.Get(url)
